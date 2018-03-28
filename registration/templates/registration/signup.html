@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+
+	<script
+  src="http://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script> 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <title>
+		SignUp to our site!
+	</title>
+	<style type="text/css">
+		body{
+			background-image: url("background.jpg");
+			width: 100%;
+			height: 80%;
+		}
+
+		.page-footer{
+			background-color:black;
+		}
+		.card{
+		   z-index: 10;
+		   margin: 100px;
+		}
+		h1{
+			color: white;
+			z-index: 10;
+			padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<center><h1>Company's Name</h1></center>
+	<div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="background.jpg">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">Register with us!<i class="material-icons right">more_vert</i></span>
+      <p><a href="login.html">Already a Member?Sign in Here!</a></p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Register with us!<i class="material-icons right">close</i></span>
+      <div class="row">
+	    <form class="col s12">
+	      <div class="row">
+	        <div class="input-field col s6">
+	          <input id="first_name" type="text" class="validate">
+	          <label>Username</label>
+
+	        </div>
+	      </div>
+	      <div class="row">
+	        <div class="input-field col s6">
+	          <input id="first_name" type="text" name="firstname" class="validate">
+	          <label>First Name</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <input id="last_name" type="text" class="validate" name="lastname">
+	          <label for="last_name">Last Name</label>
+	        </div>
+	      </div>
+	    <div class="row">
+	        <div class="input-field col s12">
+	          <input id="email" type="email" class="validate" name="email">
+	          <label for="email">Email</label>
+	        </div>
+	    </div>
+	  	<div class="row">
+	  		<div class="input-field col s12">
+	          <input id="password" type="password" class="validate" maxlength="20" name="pass">
+	          <label>Password</label>
+	        </div>
+	  	</div>
+	  	
+	  	<div class="row">
+	  		<div class="input-field col s12">
+	          <input id="password" type="password" class="validate" maxlength="20">
+	          <label>Confirm Password</label>
+	        </div>
+	    </div>
+	    <div class="row" style="margin-left: 1%; ">
+	    	<h6>Birthdate:</h6>
+	    	<input type="text" class="datepicker" name="birthdate">
+	    </div>
+	  	<div class="row">
+	        <div class="input-field col s12">
+	          <textarea id="address" class="materialize-textarea" name="address"></textarea>
+	          <label>Address</label>
+	        </div>
+	    </div>
+	    <div class="row">
+	    	<div class="input-field col s6">
+	          <input id="icon_telephone" type="phone" name="phone" class="validate">
+	          <label>Mobile</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <input id="address" type="text" name="zip" class="validate">
+	          <label>ZipCode</label>
+	        </div>
+	    </div>
+	  	<div class="row">
+	        <div class="input-field col s6">
+	          <input id="address" type="text" name="city" class="validate">
+	          <label>City</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <input id="address" type="text" name="state" class="validate">
+	          <label>State</label>
+	        </div>
+	        
+	    </div>
+	    <br><br><br>
+	    <div class="row">
+	  	  <center><button class="btn waves-effect waves-light" type="submit" name="action">Submit</button></center>
+		</div>
+	  </form>
+	</div>
+</div>
+</div>
+<footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+	<script>
+		$('#textarea1').val('New Text');
+  		$('#textarea1').trigger('autoresize');
+        $('.datepicker').pickadate({
+	    selectMonths: true, // Creates a dropdown to control month
+	    selectYears: 200, // Creates a dropdown of 15 years to control year,
+	    max: new Date().setYear(new Date().getFullYear()),
+	    //max: new Date( date.getFullYear(), date.getMonth() + 1, date.getDate() )
+	    today: 'Today',
+	    clear: 'Clear',
+	    close: 'Ok',
+	    closeOnSelect: false // Close upon selecting a date,
+	  });
+	</script>
+</body>
+</html>
