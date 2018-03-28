@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="JS_1_5" />
   </component>
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.6" project-jdk-type="Python SDK" />
+>>>>>>> 3f053fcfcca01e40af28365b842c4969d69f06b6
 </project>
