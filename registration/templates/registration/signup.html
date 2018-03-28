@@ -183,7 +183,7 @@
 		$("#loaderIcon").show();
 		jQuery.ajax({
 		url: "check_availability.php",
-		data:'username='+$("#user_name").val(),
+		data:{'username': $("#user_name").val()},
 		type: "POST",
 		success:function(data){
 			$("#user-availability-status").html(data);
@@ -196,7 +196,7 @@
 		$("#loaderIcon").show();
 		jQuery.ajax({
 		url: "check_email.php",
-		data:'email='+$("#email").val(),
+		data:{'email': $("#email").val()},
 		type: "POST",
 		success:function(data){
 			$("#email-available").html(data);
