@@ -1,7 +1,6 @@
-from django.contrib import admin
 from django.urls import path
-import views
-
+from . import views
 urlpatterns = [
-    path('registration/', views.user_registration),
+    path('register/', views.user_registration, name="register"),
+    path('check-username', views.check_username, name="check-user"),
 ]

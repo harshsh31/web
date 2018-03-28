@@ -12,6 +12,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
+
 def user_registration(request):
     if request.method == 'GET':
-        return render('registration/signup.html', {})
+        return render(request,'registration/signup.html',{})
+
+def check_username(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        if models.UserProfile.objects.filter(user__username=username).exists():
+            return HttpResponse("username not available")
+        else:
+            return HttpResponse("username available")
