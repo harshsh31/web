@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 	</title>
 	<style type="text/css">
 		body{
-			background-image: url("background.jpg");
+			background-image: url("{% static 'registration/images/background.jpg' %}");
 			width: 100%;
 			height: 80%;
 		}
@@ -42,7 +43,7 @@
 	<center><h1>Company's Name</h1></center>
 	<div class="card">
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="background.jpg">
+      <img class="activator" src="{% static 'registration/images/background.jpg' %}">
     </div>
     <div class="card-content">
       <span class="card-title activator grey-text text-darken-4">Register with us!<i class="material-icons right">more_vert</i></span>
@@ -51,77 +52,84 @@
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">Register with us!<i class="material-icons right">close</i></span>
       <div class="row">
-	    <form class="col s12">
+	    <form class="col s12" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 	      <div class="row">
 	        <div class="input-field col s6">
-	          <input id="first_name" type="text" class="validate">
+	          <input id="user_name" type="text" class="validate" onblur="checkAvailability()" minlength="5" name="username" required="true" autocomplete="on">
 	          <label>Username</label>
-
+	          <span id="user-availability-status" style="color: red;"></span>
+	        <span id="user-availability-status1" style="color: green;"></span>
 	        </div>
+	        <p><img src="LoaderIcon.gif" id="loaderIcon" style="display:none" /></p>
 	      </div>
 	      <div class="row">
 	        <div class="input-field col s6">
-	          <input id="first_name" type="text" name="firstname" class="validate">
+	          <input id="first_name" type="text" name="firstname"class="validate" required="true" autocomplete="on">
 	          <label>First Name</label>
 	        </div>
 	        <div class="input-field col s6">
-	          <input id="last_name" type="text" class="validate" name="lastname">
+	          <input id="last_name" type="text" class="validate" name="lastname" required="true" autocomplete="on">
 	          <label for="last_name">Last Name</label>
 	        </div>
 	      </div>
 	    <div class="row">
 	        <div class="input-field col s12">
-	          <input id="email" type="email" class="validate" name="email">
+	          <input id="email" type="email" class="validate" name="email" onblur="checkEmail()" required="true" autocomplete="on">
 	          <label for="email">Email</label>
 	        </div>
+	        <span id="email-available" style="color: red;"></span>
+	        <span id="email-available" style="color: green;"></span>
+	        <p><img src="LoaderIcon.gif" id="loaderIcon" style="display:none" /></p>
 	    </div>
 	  	<div class="row">
 	  		<div class="input-field col s12">
-	          <input id="password" type="password" class="validate" maxlength="20" name="pass">
+	          <input id="pass" type="password" class="validate" maxlength="20" minlength="8" name="pass" required="true">
 	          <label>Password</label>
+	          <span id='message1'></span>
 	        </div>
 	  	</div>
 	  	
 	  	<div class="row">
 	  		<div class="input-field col s12">
-	          <input id="password" type="password" class="validate" maxlength="20">
+	          <input id="cpass" type="password" name="cpass" class="validate" minlength="8" maxlength="20" required="true">
 	          <label>Confirm Password</label>
+	          <span id='message'></span>
 	        </div>
 	    </div>
 	    <div class="row" style="margin-left: 1%; ">
 	    	<h6>Birthdate:</h6>
-	    	<input type="text" class="datepicker" name="birthdate">
+	    	<input type="text" class="datepicker" name="birthdate" required="true" autocomplete="on">
 	    </div>
 	  	<div class="row">
 	        <div class="input-field col s12">
-	          <textarea id="address" class="materialize-textarea" name="address"></textarea>
+	          <textarea id="address" class="materialize-textarea" name="address" required="true" autocomplete="on"></textarea>
 	          <label>Address</label>
 	        </div>
 	    </div>
 	    <div class="row">
 	    	<div class="input-field col s6">
-	          <input id="icon_telephone" type="phone" name="phone" class="validate">
-	          <label>Mobile</label>
+	          <i class="material-icons prefix">phone</i>
+	          <input id="icon_telephone" type="tel" class="validate" name="phone" required="true" autocomplete="on">
+	          <label>Phone</label>
 	        </div>
 	        <div class="input-field col s6">
-	          <input id="address" type="text" name="zip" class="validate">
+	          <input id="address" type="text" name="zip" class="validate" required="true" autocomplete="on">
 	          <label>ZipCode</label>
 	        </div>
 	    </div>
 	  	<div class="row">
 	        <div class="input-field col s6">
-	          <input id="address" type="text" name="city" class="validate">
+	          <input id="address" type="text" name="city" class="validate" required="true" autocomplete="on">
 	          <label>City</label>
 	        </div>
 	        <div class="input-field col s6">
-	          <input id="address" type="text" name="state" class="validate">
+	          <input id="address" type="text" name="state" class="validate" required="true" autocomplete="on">
 	          <label>State</label>
 	        </div>
-	        
 	    </div>
 	    <br><br><br>
 	    <div class="row">
-	  	  <center><button class="btn waves-effect waves-light" type="submit" name="action">Submit</button></center>
+	  	  <center><button class="btn waves-effect waves-light" id="formValidate" type="submit" name="submit">Submit</button></center>
 		</div>
 	  </form>
 	</div>
@@ -165,6 +173,38 @@
 	    close: 'Ok',
 	    closeOnSelect: false // Close upon selecting a date,
 	  });
+        $('#pass, #cpass').on('keyup', function () {
+		  if ($('#pass').val() == $('#cpass').val()) {
+		    $('#message').html('Password and Confirm Password are Matching').css('color', 'green');
+		  } else 
+		    $('#message').html('Password and Confirm Password are Not Matching').css('color', 'red');
+		});
+		function checkAvailability() {
+		$("#loaderIcon").show();
+		jQuery.ajax({
+		url: "check_availability.php",
+		data:'username='+$("#user_name").val(),
+		type: "POST",
+		success:function(data){
+			$("#user-availability-status").html(data);
+			$("#loaderIcon").hide();
+		},
+		error:function (){}
+		});
+		}
+		function checkEmail() {
+		$("#loaderIcon").show();
+		jQuery.ajax({
+		url: "check_email.php",
+		data:'email='+$("#email").val(),
+		type: "POST",
+		success:function(data){
+			$("#email-available").html(data);
+			$("#loaderIcon").hide();
+		},
+		error:function (){}
+		});
+		}
 	</script>
 </body>
 </html>
