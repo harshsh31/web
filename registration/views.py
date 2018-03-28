@@ -14,4 +14,4 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 def user_registration(request):
     if request.method == 'GET':
-        return render('registration/signup.html',{})
+        return render('registration/signup.html', {})
