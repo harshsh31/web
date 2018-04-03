@@ -52,26 +52,57 @@
     <div class="card-reveal">
       <span class="card-title grey-text text-darken-4">Register with us!<i class="material-icons right">close</i></span>
       <div class="row">
-	    <form class="col s12" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+	    <form class="col s12" method="post" id="post_form">
 	      <div class="row">
 	        <div class="input-field col s6">
 	          <input id="user_name" type="text" class="validate" onblur="checkAvailability()" minlength="5" name="username" required="true" autocomplete="on">
 	          <label>Username</label>
 	          <span id="user-availability-status" style="color: red;"></span>
-	        <span id="user-availability-status1" style="color: green;"></span>
+                <span id="user-availabilty-status1" style="color: green;"></span>
 	        </div>
-	        <p><img src="LoaderIcon.gif" id="loaderIcon" style="display:none" /></p>
+	        <p><img src="{% static 'registration/images/LoaderIcon.gif' %}" id="loaderIcon" style="display:none" /></p>
 	      </div>
 	      <div class="row">
-	        <div class="input-field col s6">
+	        <div class="input-field col s4">
 	          <input id="first_name" type="text" name="firstname"class="validate" required="true" autocomplete="on">
 	          <label>First Name</label>
 	        </div>
-	        <div class="input-field col s6">
+              <div class="input-field col s4">
+	          <input id="middle_name" type="text" name="firstname"class="validate" required="true" autocomplete="on">
+	          <label>Middle Name</label>
+	        </div>
+	        <div class="input-field col s4">
 	          <input id="last_name" type="text" class="validate" name="lastname" required="true" autocomplete="on">
 	          <label for="last_name">Last Name</label>
 	        </div>
 	      </div>
+	      <div class="row" style="margin-left: 1%">
+	      	<p style="color: #9e9e9e">Gender</p>
+	      		<div class="col s12">
+	      			<div class="">
+				      
+					    <p>
+					      <label>
+					        <input name="group1" type="radio" style="opacity: 1; padding: 4%" />
+					        <span style="margin-left: 2%; font-size: 20sp;">Male</span>
+					      </label>
+					    </p>
+					    <p>
+					      <label>
+					        <input name="group1" type="radio"  style="opacity: 1; padding: 4%" />
+					        <span style="margin-left: 2%">Female</span>
+					      </label>
+					    </p>
+					    <p>
+					      <label>
+					        <input name="group1" type="radio"  style="opacity: 1; padding: 4%" />
+					        <span style="margin-left: 2%">Other</span>
+					      </label>
+					    </p>
+					    </div>
+					</div>
+				</div>
+		
 	    <div class="row">
 	        <div class="input-field col s12">
 	          <input id="email" type="email" class="validate" name="email" onblur="checkEmail()" required="true" autocomplete="on">
@@ -79,7 +110,7 @@
 	        </div>
 	        <span id="email-available" style="color: red;"></span>
 	        <span id="email-available" style="color: green;"></span>
-	        <p><img src="LoaderIcon.gif" id="loaderIcon" style="display:none" /></p>
+	        <p><img src="{% static 'registration/images/LoaderIcon.gif' %}" id="loaderIcon" style="display:none" /></p>
 	    </div>
 	  	<div class="row">
 	  		<div class="input-field col s12">
@@ -96,35 +127,41 @@
 	          <span id='message'></span>
 	        </div>
 	    </div>
-	    <div class="row" style="margin-left: 1%; ">
-	    	<h6>Birthdate:</h6>
-	    	<input type="text" class="datepicker" name="birthdate" required="true" autocomplete="on">
-	    </div>
 	  	<div class="row">
 	        <div class="input-field col s12">
 	          <textarea id="address" class="materialize-textarea" name="address" required="true" autocomplete="on"></textarea>
 	          <label>Address</label>
 	        </div>
 	    </div>
+        <div class="row">
+	    	<div class="input-field col s6">
+	          <input id="designation" type="text" name="zip" class="validate" required="true">
+	          <label>Designation</label>
+	        </div>
+	        <div class="input-field col s6">
+	          <input id="reference" type="text" name="zip" class="validate" required="true">
+	          <label>Reference</label>
+	        </div>
+	    </div>
 	    <div class="row">
 	    	<div class="input-field col s6">
 	          <i class="material-icons prefix">phone</i>
-	          <input id="icon_telephone" type="tel" class="validate" name="phone" required="true" autocomplete="on">
+	          <input id="icon_telephone" type="tel" class="validate" name="phone" required="true" >
 	          <label>Phone</label>
 	        </div>
 	        <div class="input-field col s6">
-	          <input id="address" type="text" name="zip" class="validate" required="true" autocomplete="on">
+	          <input id="address" type="text" name="zip" class="validate" required="true">
 	          <label>ZipCode</label>
 	        </div>
 	    </div>
 	  	<div class="row">
 	        <div class="input-field col s6">
-	          <input id="address" type="text" name="city" class="validate" required="true" autocomplete="on">
+	          <input id="city" type="text" name="city" class="validate" required="true" >
 	          <label>City</label>
 	        </div>
 	        <div class="input-field col s6">
-	          <input id="address" type="text" name="state" class="validate" required="true" autocomplete="on">
-	          <label>State</label>
+	          <input id="country" type="text" name="state" class="validate" required="true" >
+	          <label>Country</label>
 	        </div>
 	    </div>
 	    <br><br><br>
@@ -182,11 +219,17 @@
 		function checkAvailability() {
 		$("#loaderIcon").show();
 		jQuery.ajax({
-		url: "check_availability.php",
+		url: "{% url 'registration:check-username' %}",
 		data:{'username': $("#user_name").val()},
 		type: "POST",
 		success:function(data){
-			$("#user-availability-status").html(data);
+		    console.log(data);
+		    if (data == "0"){
+			$("#user-availability-status").html("<span class='status-not-available' style='color: red;'>Username Not Available.</span>");}
+			else{
+		        $("#user-availability-status").html("<span class='status-available1' style='color: green;'>Username Available.</span>");
+            }
+
 			$("#loaderIcon").hide();
 		},
 		error:function (){}
@@ -195,16 +238,39 @@
 		function checkEmail() {
 		$("#loaderIcon").show();
 		jQuery.ajax({
-		url: "check_email.php",
+		url: "{%  url 'registration:check-email' %}",
 		data:{'email': $("#email").val()},
 		type: "POST",
 		success:function(data){
-			$("#email-available").html(data);
+			if (data == "0"){
+			$("#user-availability-status").html("<span class='email-not-available' style='color: red;'>Username Not Available.</span>");}
+			else{
+		        $("#user-availability-status").html("<span class='email-available1' style='color: green;'>Username Available.</span>");
+            }
 			$("#loaderIcon").hide();
 		},
 		error:function (){}
 		});
 		}
+		$('#post_form').on('submit',function (event) {
+            event.preventDefault();
+            create_post();
+        })
+        function create_post() {
+            var data;
+            data={'user' : $('#user_name').val(),
+                    'first_name' : $('#first_name').val(),
+                'middle_name': $('#middle_name').val(),
+            'last_name' : $('#last_name').val(),
+            'email' : $('#email').val(),
+            'pass' : $('#pass').val(),
+            'phone': $('#icon_telephone').val(),
+            'address' : $('#address').val(),
+            'city' : $('#city').val(),
+            'country' : $('#country').val(),
+            'designation' : $('#designation').val,
+            'reference' : $('#reference').val(),}
+        }
 	</script>
 </body>
 </html>
