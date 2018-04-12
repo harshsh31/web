@@ -10,6 +10,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -36,3 +37,25 @@ def check_email(request):
             return HttpResponse("0")
         else:
             return HttpResponse("1")
+@csrf_exempt
+def submit_post(request):
+    if request.method == 'POST':
+        data = json.loads(request.POST['data'])
+        print(data)
+        user = User()
+        user.username = data['user']
+        user.email = data['email']
+        user.first_name = data['first_name']
+        user.last_name = data['last_name']
+        user.set_password(data['pass'])
+        user.save()
+        userprofile = models.UserProfile()
+        userprofile.user=user
+        userprofile.middle_name = data['middle_name']
+        userprofile.address = data['address']
+        userprofile.pin_no = int(data['pincode'])
+        userprofile.city = data['city']
+        userprofile.contact_no = int(data['phone'])
+        userprofile.country = data['country']
+        userprofile.save()
+        return HttpResponse("success")
