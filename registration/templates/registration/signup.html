@@ -276,10 +276,16 @@
             data = {'data': JSON.stringify(data)};
 
             $.post('{%  url 'registration:submit_post' %}',data,function ( data ){
+
                 console.log(data);
             });
         }
-
+        $('#pin').keyup(function (){
+        	console.log("ad");
+        	$.get("https://pincode.saratchandra.in/api/pincode/400005",function(data,status){
+        		console.log(data);
+        	});
+        });
 
 	</script>
 </body>
