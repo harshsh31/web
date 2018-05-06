@@ -5,17 +5,25 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import render, redirect, get_object_or_404, _get_queryset, HttpResponse
 from django.http import JsonResponse
-from pprint import pprint
-from datetime import datetime
+from datetime import datetime,date
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from pprint import pprint
 
 # Create your views here.
 
 def user_registration(request):
     if request.method == 'GET':
+        print("Harsh")
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        pprint(ip)
+        pprint(request.__dict__)
         return render(request,'registration/signup.html',{})
 @csrf_exempt
 def check_username(request):
@@ -47,15 +55,22 @@ def submit_post(request):
         user.first_name = data['first_name']
         user.last_name = data['last_name']
         user.set_password(data['pass'])
-        user.save()
+
         userprofile = models.UserProfile()
-        userprofile.user=user
+
         userprofile.middle_name = data['middle_name']
         userprofile.address = data['address']
         userprofile.pin_no = int(data['pincode'])
         userprofile.city = data['city']
         userprofile.contact_no = int(data['phone'])
         userprofile.country = data['country']
+        ip = request.META['REMOTE_ADDR']
+        print(ip)
+        userprofile.ip_address = ip
+        pprint(userprofile.__dict__)
+        user.save()
+        userprofile.save()
+        userprofile.user = user
         userprofile.save()
         return HttpResponse("success")
 

@@ -35,6 +35,10 @@ EMAIL_USE_TLS = True
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL= EMAIL_HOST_USER
 
+ADMINS = (
+    ('harsh shah','harshsh31@gmail.com'),
+    )
+MANAGERS = ADMINS
 # Application definition
 
 INSTALLED_APPS = [
