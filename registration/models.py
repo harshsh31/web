@@ -30,3 +30,20 @@ class UserProfile(models.Model):
 
 	def __str__(self):
 		return self.user.username
+
+
+class Cities(models.Model):
+	city = models.CharField(max_length=255,null=True,blank=True)
+	def __str__(self):
+		return self.city
+
+class State(models.Model):
+	state = models.CharField(max_length=255,null=True,blank=True)
+	def __str__(self):
+		return self.state
+
+class Country(models.Model):
+	country = models.CharField(max_length=255,null=True,blank=True)
+	def __str__(self):
+		return self.country
+

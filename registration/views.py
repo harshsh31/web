@@ -14,7 +14,6 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-
 def user_registration(request):
     if request.method == 'GET':
         return render(request,'registration/signup.html',{})
@@ -59,3 +58,16 @@ def submit_post(request):
         userprofile.country = data['country']
         userprofile.save()
         return HttpResponse("success")
+
+
+def city_country(request):
+    if request.method == 'GET':
+        city = models.Cities.objects.all()
+        country = models.Country.objects.all()
+        data = {
+            'city': city,
+            'country': country,
+        }
+        json.dumps(data)
+        return HttpResponse(json.dumps(data))
+

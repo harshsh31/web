@@ -25,10 +25,10 @@ SECRET_KEY = '*c#t&vye(-6&7gfm2e)$7ql(%6c432gqc9v6!_r(uv5$+tlx$4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ide50-rathorekishan0.cs50.io']
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'harshsh31@gmail.com' 
+EMAIL_HOST_USER = 'harshsh31@gmail.com'
 EMAIL_HOST_PASSWORD = 'harshshah31'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'registration.apps.RegistrationConfig',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
