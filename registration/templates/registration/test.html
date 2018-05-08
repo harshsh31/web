@@ -36,6 +36,114 @@
               </div>
           </div>
         </div>
-  
+  <script>
+      function myFunction(){
+        var user_name = document.registration.user_name.value;
+        var first_name = document.registration.first_name.value;
+        var middle_name = document.registration.middle_name.value;
+        var last_name = document.registration.last_name.value;
+        var email = document.registration.email.value;
+        var password = document.registration.pass.value;
+        var address = document.registration.address.value;
+        var designation = document.registration.designation.value;
+        var reference = document.registration.reference.value;
+        var city = document.registration.city.value;
+        var pin =document.registration.pin.value;
+        var country = document.registration.country.value;
+        var phone = document.registration.icon_telephone.value;
+        var error = false;
+        if(user_name == ""){
+            error = true;
+            document.getElementById('user_name_err').innerHTML = "Username must not be empty";
+        }
+        else if(user_name.length < 5){
+            error = true;
+            document.getElementById('user_name_err').innerHTML = "Username must be greater than 5 characters";
+        }
+        if(first_name == ""){
+            error = true;
+            document.getElementById('first_name_err').innerHTML = "First Name must not be empty";
+        }
+        else if(first_name.length < 5){
+            error = true;
+            document.getElementById('first_name_err').innerHTML = "First Name must be greater than 5 characters";
+        }
+        if(middle_name == ""){
+            error = true;
+            document.getElementById('middle_name_err').innerHTML = "Middle Name must not be empty";
+        }
+        else if(middle_name.length < 5){
+            error = true;
+            document.getElementById('middle_name_err').innerHTML = "Middle Name must be greater than 5 characters";
+        }
+        if(last_name == ""){
+            error = true;
+            document.getElementById('last_name_err').innerHTML = "Last Name must not be empty";
+        }
+        else if(last_name.length < 5){
+            error = true;
+            document.getElementById('last_name_err').innerHTML = "Last Name must be greater than 5 characters";
+        }
+        if(password == ""){
+            error = true;
+            document.getElementById('password_err').innerHTML = "Password must not be empty\n";
+        }
+        else if(password.length < 8){
+            error = true;
+            document.getElementById('password_err').innerHTML = "Password must be greater than 8 characters\n";
+        }
+        if (password.search(/[a-z]/) < 0) {
+            error = true;
+            document.getElementById('password_err').innerHTML += "<br/>Password must contain atleast one small character";
+        }
+        if (password.search(/[0-9]/) < 0) {
+            error = true;
+            document.getElementById('password_err').innerHTML += "<br/>Password must contain atleast one digit\n";
+        }
+        if(email == ""){
+            error = true;
+            document.getElementById('email_err').innerHTML = "Email must not be empty";
+        }
+        else if(!(validateEmail(email))){
+            error=true;
+            document.getElementById('email_err').innerHTML = "Email is not valid.Please enter a valid email id";
+        }
+        if(phone == ""){
+            error = true;
+            document.getElementById('phone_err').innerHTML = "Please enter a phone number";
+        }
+        if(city == ""){
+            error = true;
+            document.getElementById('city_err').innerHTML = "City must not be empty";
+        }
+        if(country == ""){
+            error = true;
+            document.getElementById('country_err').innerHTML = "Country must not be empty";
+        }
+        if(designation == ""){
+            error = true;
+            document.getElementById('designation_err').innerHTML = "Designation must not be empty";
+        }
+        if(pin == ""){
+            error = true;
+            document.getElementById('pin_err').innerHTML = "PinCode must not be empty";
+        }
+        if(address == ""){
+            error = true;
+            document.getElementById('address_err').innerHTML = "Username must not be empty";
+        }
+        if(reference == ""){
+        	error = true;
+        	document.getElementById('reference_err').innerHTML = "Reference must not be empty";
+        }
+        if(error)
+            return false;
+    }
+
+    function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    }
+  </script>
 </body>
 </html>

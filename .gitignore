@@ -25,6 +25,7 @@ reloadmodels.py
 .ipynb_checkpoints/
 *.cson
 db.sqlite3
+*.sqlite3
 newrelic-log.log
 .flake8
 .idea/

@@ -25,7 +25,7 @@ SECRET_KEY = '*c#t&vye(-6&7gfm2e)$7ql(%6c432gqc9v6!_r(uv5$+tlx$4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ide50-rathorekishan0.cs50.io']
+ALLOWED_HOSTS = ['ide50-rathorekishan0.cs50.io','127.0.0.1']
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'harshsh31@gmail.com'

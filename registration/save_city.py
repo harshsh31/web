@@ -1491,10 +1491,6 @@ def save_city():
     for i in city_state:
         city = models.Cities(city=i['city'])
         city.save()
-        state.add(i['state'])
-    for s in state:
-        st = models.State(state = s)
-        st.save()
     for c in countries:
         coun = models.Country(country=c)
         coun.save()

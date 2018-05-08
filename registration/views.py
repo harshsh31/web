@@ -10,20 +10,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+import random
 from pprint import pprint
+import zerosms
 
 # Create your views here.
 
 def user_registration(request):
     if request.method == 'GET':
-        print("Harsh")
         x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
         if x_forwarded_for:
             ip = x_forwarded_for.split(',')[0]
         else:
             ip = request.META.get('REMOTE_ADDR')
-        pprint(ip)
-        pprint(request.__dict__)
         return render(request,'registration/signup.html',{})
 @csrf_exempt
 def check_username(request):
@@ -48,7 +47,12 @@ def check_email(request):
 def submit_post(request):
     if request.method == 'POST':
         data = json.loads(request.POST['data'])
-        print(data)
+        sender = "8097707287"
+        password = "harshshah31"
+        otp = random.randrange(100000,999999,1)
+        msg = "Your otp is" + str(otp)
+        zerosms.sms(phno=sender,passwd=password,receivernum=data['phone'],message=msg)
+        return HttpResponse("Send")
         user = User()
         user.username = data['user']
         user.email = data['email']
@@ -65,7 +69,6 @@ def submit_post(request):
         userprofile.contact_no = int(data['phone'])
         userprofile.country = data['country']
         ip = request.META['REMOTE_ADDR']
-        print(ip)
         userprofile.ip_address = ip
         pprint(userprofile.__dict__)
         user.save()
@@ -78,10 +81,16 @@ def submit_post(request):
 def city_country(request):
     if request.method == 'GET':
         city = models.Cities.objects.all()
+        cities = []
+        countries =[]
+        for c in city:
+            cities.append(c.city)
         country = models.Country.objects.all()
+        for c in country:
+            countries.append(c.country)
         data = {
-            'city': city,
-            'country': country,
+            'city': cities,
+            'country': countries,
         }
         json.dumps(data)
         return HttpResponse(json.dumps(data))
