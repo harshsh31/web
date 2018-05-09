@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from .utils import code_generator
+from django.core.mail import send_mail
+from django.conf import settings
+import random
+import zerosms
 # Create your models here.
 
 
@@ -27,9 +31,31 @@ class UserProfile(models.Model):
 	reference = models.CharField(max_length=255, null=True, blank=True)
 	timestamp = models.DateTimeField(auto_now_add=True)
 	ip_address = models.GenericIPAddressField(null=True,blank=True)
+	activation_key=models.CharField(max_length=250,null=True,blank=True)
+	otp=models.CharField(max_length=250,null=True,blank=True)
+	activated=models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.user.username
+	def send_activation_email(self):
+	        if not self.activated:
+	            self.activation_key=code_generator()
+	            self.save()
+	            subject = 'Ani email activation'
+	            from_email = settings.DEFAULT_FROM_EMAIL
+	            message = f'activate your account here: {self.activation_key}'
+	            recipient_list = [self.user.email]
+	            html_message = f'<p>activate your account here: {self.activation_key}</p>'
+	            sent_mail=send_mail(subject, message, from_email, recipient_list, fail_silently=False, html_message=html_message)
+	            return sent_mail
+	def send_otp(self):
+		sender = "8097707287"
+		password = "harshshah31"
+		otp = random.randrange(100000,999999,1)
+		self.otp = otp
+		self.save()
+		msg = "Your otp is" + str(otp)
+		zerosms.sms(phno=sender,passwd=password,receivernum=self.contact_no,message=msg)
 
 
 class Cities(models.Model):

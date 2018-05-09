@@ -47,12 +47,6 @@ def check_email(request):
 def submit_post(request):
     if request.method == 'POST':
         data = json.loads(request.POST['data'])
-        sender = "8097707287"
-        password = "harshshah31"
-        otp = random.randrange(100000,999999,1)
-        msg = "Your otp is" + str(otp)
-        zerosms.sms(phno=sender,passwd=password,receivernum=data['phone'],message=msg)
-        return HttpResponse("Send")
         user = User()
         user.username = data['user']
         user.email = data['email']
@@ -75,6 +69,8 @@ def submit_post(request):
         userprofile.save()
         userprofile.user = user
         userprofile.save()
+        userprofile.send_activation_email()
+        userprofile.send_otp()
         return HttpResponse("success")
 
 
@@ -92,6 +88,5 @@ def city_country(request):
             'city': cities,
             'country': countries,
         }
-        json.dumps(data)
         return HttpResponse(json.dumps(data))
 

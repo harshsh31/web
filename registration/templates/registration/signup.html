@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-	
+
 
 	<script
   src="http://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script> 
+  crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!-- Compiled and minified CSS -->
@@ -118,7 +118,7 @@
 	      	<p style="color: #9e9e9e">Gender</p>
 	      		<div class="col s12">
 	      			<div class="">
-				      
+
 					    <p>
 					      <label>
 					        <input name="group1" id="male" type="radio" style="opacity: 1; padding: 4%" />
@@ -141,7 +141,7 @@
                         <span id="gender_err" class="error"></span>
 					</div>
 				</div>
-		
+
 	    <div class="row">
 	        <div class="input-field col s12">
 	          <input id="email" type="email" class="validate" name="email" onblur="checkEmail()" autocomplete="off">
@@ -160,7 +160,7 @@
 	          <span id='message1'></span>
 	        </div>
 	  	</div>
-	  	
+
 	  	<div class="row">
 	  		<div class="input-field col s12">
 	          <input id="cpass" type="password" name="cpass" class="validate" >
@@ -378,7 +378,7 @@
         $('#pass, #cpass').on('keyup', function () {
 		  if ($('#pass').val() == $('#cpass').val()) {
 		    $('#message').html('Password and Confirm Password are Matching').css('color', 'green');
-		  } else 
+		  } else
 		    $('#message').html('Password and Confirm Password are Not Matching').css('color', 'red');
 		});
 		function checkAvailability() {
@@ -517,7 +517,8 @@
     }
     $('#post_form').on('submit',function (event) {
                 event.preventDefault();
-                create_post();
+                if(myFunction()==true)
+                  create_post();
             });
             function create_post() {
                 var data;
@@ -538,7 +539,7 @@
                 };
                 data = {'data': JSON.stringify(data)};
 
-                $.post('{%  url 'registration:submit_post' %}',data,function ( data ){
+                $.post('{%  url "registration:submit_post" %}',data,function ( data ){
 
                     console.log(data);
                 });
