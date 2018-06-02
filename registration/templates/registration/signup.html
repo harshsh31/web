@@ -346,14 +346,6 @@
                 error = true;
                 document.getElementById('pin_err').innerHTML = "PinCode must not be empty";
             }
-            if(address == ""){
-                error = true;
-                document.getElementById('address_err').innerHTML = "Username must not be empty";
-            }
-            if(reference == ""){
-                error = true;
-                document.getElementById('reference_err').innerHTML = "Reference must not be empty";
-            }
             if(document.getElementById('gender_1').checked == false && document.getElementById('gender_!').checked && document.getElementById('gender_3').checked){
                 error = true;
                 document.getElementById('gender_err').innerHTML = "Please select a gender"
@@ -544,6 +536,7 @@
                         'pincode': $('#pin').val(),
                         'city': $('#city').val(),
                         'country': $('#country').val(),
+                        'reference': $('#reference').val(),
                         'designation': $('#designation').val(),
                         'reference': $('#reference').val(),
                 };

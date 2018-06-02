@@ -46,36 +46,40 @@ def check_email(request):
 @csrf_exempt
 def submit_post(request):
     if request.method == 'POST':
-        print('post method')
-        data = json.loads(request.POST['data'])
-        print(data)
-        user = User()
-        user.username = data['user']
-        user.email = data['email']
-        user.first_name = data['first_name']
-        user.last_name = data['last_name']
-        user.set_password(data['pass'])
-        userprofile = models.UserProfile()
-        userprofile.middle_name = data['middle_name']
-        userprofile.address = data['address']
-        userprofile.pin_no = int(data['pincode'])
-        userprofile.city = data['city']
-        userprofile.contact_no = int(data['phone'])
-        userprofile.country = data['country']
-        ip = request.META['REMOTE_ADDR']
-        userprofile.ip_address = ip
-        userprofile.gender = data['gender']
-        userprofile.designations = data['designation']
-        pprint(userprofile.__dict__)
-        user.save()
-        print("user saved")
-        print(user.id)
-        userprofile.user = user
-        userprofile.save()
-        print("up saved")
-        userprofile.send_activation_email()
-        userprofile.send_otp()
-        return HttpResponse("success")
+        try:
+            print('post method')
+            data = json.loads(request.POST['data'])
+            print(data)
+            user = User()
+            user.username = data['user']
+            user.email = data['email']
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+            user.set_password(data['pass'])
+            userprofile = models.UserProfile()
+            userprofile.middle_name = data['middle_name']
+            userprofile.address = data['address']
+            userprofile.pin_no = int(data['pincode'])
+            userprofile.city = data['city']
+            userprofile.contact_no = int(data['phone'])
+            userprofile.country = data['country']
+            ip = request.META['REMOTE_ADDR']
+            userprofile.ip_address = ip
+            userprofile.gender = data['gender']
+            userprofile.designations = data['designation']
+            pprint(userprofile.__dict__)
+            user.save()
+            print("user saved")
+            print(user.id)
+            userprofile.user = user
+            userprofile.save()
+            print("up saved")
+            userprofile.send_activation_email()
+            userprofile.send_otp()
+            return render(request,'registration/verify.html',{})
+        except Exception:
+            return HttpResponse("fail")
+
 
 
 def city_country(request):
