@@ -121,19 +121,19 @@
 
 					    <p>
 					      <label>
-					        <input name="group1" id="male" type="radio" style="opacity: 1; padding: 4%" />
+					        <input name="group1" id="gender_1" type="radio" value="male" style="opacity: 1; padding: 4%" />
 					        <span style="margin-left: 2%; font-size: 20sp;">Male</span>
 					      </label>
 					    </p>
 					    <p>
 					      <label>
-					        <input name="group1" id="female" type="radio"  style="opacity: 1; padding: 4%" />
+					        <input name="group1" id="gender_2" type="radio" value="female"  style="opacity: 1; padding: 4%" />
 					        <span style="margin-left: 2%">Female</span>
 					      </label>
 					    </p>
 					    <p>
 					      <label>
-					        <input name="group1" id="others" type="radio"  style="opacity: 1; padding: 4%" />
+					        <input name="group1" id="gender_3" type="radio" value="others"  style="opacity: 1; padding: 4%" />
 					        <span style="margin-left: 2%">Other</span>
 					      </label>
 					    </p>
@@ -178,10 +178,10 @@
         <div class="row">
 	    	<div class="input-field col s6">
 	          <div class="input-field">
-                  <select required>
+                  <select id="designation" required>
                     <option value="" disabled selected>Designation</option>
                     <option value="Lawyer">Lawyer</option>
-                    <option value="Doctor">Dooctor</option>
+                    <option value="Doctor">Doctor</option>
                   </select>
                   <span id="designation_err" class="error"></span>
               </div>
@@ -354,7 +354,7 @@
                 error = true;
                 document.getElementById('reference_err').innerHTML = "Reference must not be empty";
             }
-            if(document.getElementById('male').checked == false && document.getElementById('female').checked && document.getElementById('others').checked){
+            if(document.getElementById('gender_1').checked == false && document.getElementById('gender_!').checked && document.getElementById('gender_3').checked){
                 error = true;
                 document.getElementById('gender_err').innerHTML = "Please select a gender"
             }
@@ -517,11 +517,20 @@
     }
     $('#post_form').on('submit',function (event) {
                 event.preventDefault();
-                if(myFunction()==true)
+                var success = myFunction();
+                if(success )
                   create_post();
             });
             function create_post() {
                 var data;
+                if (document.getElementById('gender_1').checked) {
+                  gender = document.getElementById('gender_1').value;
+                }
+                else if (document.getElementById('gender_2').checked) {
+                  gender = document.getElementById('gender_2').value;
+                }
+                else
+                    gender = document.getElementById('gender_3').value;
                 data = {
                         'user': $('#user_name').val(),
                         'first_name': $('#first_name').val(),
@@ -531,16 +540,18 @@
                         'pass': $('#pass').val(),
                         'phone': $('#icon_telephone').val(),
                         'address': $('#address').val(),
+                        'gender': gender,
                         'pincode': $('#pin').val(),
                         'city': $('#city').val(),
                         'country': $('#country').val(),
-                        'designation': $('#designation').val,
+                        'designation': $('#designation').val(),
                         'reference': $('#reference').val(),
                 };
+                console.log($('#designation').val());
+                console.log(data['gender']);
                 data = {'data': JSON.stringify(data)};
 
                 $.post('{%  url "registration:submit_post" %}',data,function ( data ){
-
                     console.log(data);
                 });
             }
