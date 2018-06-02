@@ -1,5 +1,7 @@
 myenv
 *.pyc
+*.xml
+*.idea
 requirements-o.txt
 bkend_bk
 redis-1.2.5.tar
