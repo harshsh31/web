@@ -1,5 +1,8 @@
 myenv
 *.pyc
+<<<<<<< HEAD
+*.xml
+=======
 .DS_Store
 bin/
 include/
@@ -8,6 +11,7 @@ include/
 __pycache__/
 *.py[cod]
 *$py.class
+>>>>>>> 8a7ca8f99459741cce75e4af93a3900b8df3a721
 *.idea
 requirements-o.txt
 bkend_bk

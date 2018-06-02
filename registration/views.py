@@ -82,7 +82,6 @@ def submit_post(request):
 
 
 
-
 def city_country(request):
     if request.method == 'GET':
         city = models.Cities.objects.all()
