@@ -28,8 +28,8 @@ DEBUG = True
 ALLOWED_HOSTS = ['ide50-rathorekishan0.cs50.io','127.0.0.1']
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'harshsh31@gmail.com'
-EMAIL_HOST_PASSWORD = 'harshshah31'
+EMAIL_HOST_USER = 'adit.fitternity@gmail.com'
+EMAIL_HOST_PASSWORD = 'wtmshare'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'

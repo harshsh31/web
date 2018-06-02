@@ -41,7 +41,7 @@ class UserProfile(models.Model):
 	        if not self.activated:
 	            self.activation_key=code_generator()
 	            self.save()
-	            subject = 'Ani email activation'
+	            subject = 'Anil email activation'
 	            from_email = settings.DEFAULT_FROM_EMAIL
 	            message = f'activate your account here: {self.activation_key}'
 	            recipient_list = [self.user.email]
