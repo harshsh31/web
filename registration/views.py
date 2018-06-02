@@ -76,7 +76,7 @@ def submit_post(request):
             print("up saved")
             userprofile.send_activation_email()
             userprofile.send_otp()
-            return render(request,'registration/verif.html',{})
+            return HttpResponse('success')
         except Exception:
             return HttpResponse("fail")
 
@@ -99,3 +99,5 @@ def city_country(request):
         }
         return HttpResponse(json.dumps(data))
 
+def otp_verify(request):
+    pass
