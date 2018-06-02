@@ -99,4 +99,5 @@ def city_country(request):
         return HttpResponse(json.dumps(data))
 
 def otp_verify(request):
-    pass
+    if request.method == 'GET':
+        return render(request,'registration/verify.html',{})
