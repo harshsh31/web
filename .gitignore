@@ -1,5 +1,14 @@
 myenv
 *.pyc
+.DS_Store
+bin/
+include/
+# Byte-compiled / optimized / DLL files
+.mypy_cache/
+__pycache__/
+*.py[cod]
+*$py.class
+*.idea
 requirements-o.txt
 bkend_bk
 redis-1.2.5.tar
